@@ -6,5 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2021-10-22
 ### Added
+- Adds array - at() util function
+- Adds number - isWholeNumber() util function
+- Adds number - isDecimalNumber() util function
 - Adds CHANGELOG.md
 - Adds README.md
