@@ -1,7 +1,7 @@
 {
   "name": "utils",
   "version": "1.0.0",
-  "description": "A list of reusable utlity functions",
+  "description": "A list of reusable utility functions",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
