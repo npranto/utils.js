@@ -4,10 +4,9 @@
  * 
  * Ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
  * @param {Array} arr - An array
- * @param {Number} index - Arrays and/or values to concatenate into a new array.
- * If all valueN parameters are omitted, concat returns a shallow copy of the 
- * existing array on which it is called. See the description below for 
- * more details.
+ * @param {Any} items - Arrays and/or values to concatenate into a new array.
+ * If all items parameters are omitted, concat returns a shallow copy of the 
+ * existing array on which it is called.
  * @returns {Array} - A new Array instance.
  */
 const concat = (arr, ...items) => {
