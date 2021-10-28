@@ -1,5 +1,5 @@
 const test = require('./src/test/test');
-const { at, isWholeNumber, isDecimalNumber, concat, reverse } = require('./index');
+const { at, isWholeNumber, isDecimalNumber, concat, reverse, sort } = require('./index');
 
 // ========== array: at() ==========
 test(
@@ -130,7 +130,7 @@ test(
     }
   })(),
   new Error('Please pass in an array to concatenate items').message
-)
+);
 test(
   'array: concat() - 2',
   (() => {
@@ -142,32 +142,32 @@ test(
     }
   })(),
   new Error('Please pass in an array to concatenate items').message
-)
+);
 test(
   'array: concat() - 3',
   concat([1,2,3]),
   [1,2,3],
-)
+);
 test(
   'array: concat() - 4',
   concat([], undefined, null, 0, false, ''),
   [undefined, null, 0, false, ''],
-)
+);
 test(
   'array: concat() - 5',
   concat([1,2,3], [4,5,6]),
   [1,2,3,4,5,6],
-)
+);
 test(
   'array: concat() - 6',
   concat([1,2,3], [4,5,6], [8,9], 'coffee', false, ['Mango']),
   [1,2,3,4,5,6,8,9, 'coffee', false, 'Mango'],
-)
+);
 test(
   'array: concat() - 7',
   concat([1,2,3], [['do', 'not', 'spread']], [3,4,5]),
   [1,2,3, ['do', 'not', 'spread'], 3,4,5],
-)
+);
 
 // ========== array: reverse() ==========
 test(
@@ -193,14 +193,113 @@ test(
     }
   })(),
   new Error('Please pass in an array to reverse').message
-)
+);
 test(
   'array: reverse() - 3',
   reverse([1,2,3]),
   [3,2,1],
-)
+);
 test(
   'array: reverse() - 4',
   reverse([]),
   [],
-)
+);
+
+// ========== array: sort() ==========
+test(
+  'array: sort() - 1',
+  (() => {
+    try {
+      const value = sort();
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in an array to sort').message
+);
+test(
+  'array: sort() - 2',
+  (() => {
+    try {
+      const value = sort('test');
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in an array to sort').message
+);
+test(
+  'array: sort() - 3',
+  (() => {
+    try {
+      const value = sort([1,2,3]);
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in a comparison callback to sort array').message
+);
+test(
+  'array: sort() - 4',
+  (() => {
+    try {
+      const value = sort([1,2,3], 'test');
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in a comparison callback to sort array').message
+);
+test(
+  'array: sort() - 5',
+  (() => {
+    try {
+      const value = sort([1,2,3], (a, b) => {});
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Comparison callback must return a number to sort array').message
+);
+test(
+  'array: sort() - 6',
+  (() => {
+    try {
+      const value = sort([1,2,3], (a, b) => false);
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Comparison callback must return a number to sort array').message
+);
+test(
+  'array: sort() - 7',
+  sort([1,2,3], (a, b) => a - b),
+  [1,2,3],
+);
+test(
+  'array: sort() - 8',
+  sort([1,2,3], (a, b) => b - a),
+  [3,2,1],
+);
+test(
+  'array: sort() - 9',
+  sort(['Jack', 'Kevin', 'Brady'], (a, b) => a.length - b.length),
+  ['Jack', 'Kevin', 'Brady'],
+);
+test(
+  'array: sort() - 10',
+  sort(['Jack', 'Kevin', 'Brady'], (a, b) => b.length - a.length),
+  ['Kevin', 'Brady', 'Jack'],
+);
+test(
+  'array: sort() - 11',
+  sort([[1], [1,2], [1,2,4]], (a, b) => b.length - a.length),
+  [[1,2,4], [1,2], [1]],
+);
