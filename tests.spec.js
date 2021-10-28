@@ -1,6 +1,5 @@
 const test = require('./src/test/test');
-const { at, isWholeNumber, isDecimalNumber } = require('./index');
-const concat = require('./src/array/concat');
+const { at, isWholeNumber, isDecimalNumber, concat, reverse } = require('./index');
 
 // ========== array: at() ==========
 test(
@@ -120,8 +119,6 @@ test('number: isDecimalNumber() - 7', isDecimalNumber(-10), false);
 test('number: isDecimalNumber() - 8', isDecimalNumber(-10.66), true);
 
 // ========== array: concat() ==========
-
-// nothing is passed in to arr, throw an error
 test(
   'array: concat() - 1',
   (() => {
@@ -134,7 +131,6 @@ test(
   })(),
   new Error('Please pass in an array to concatenate items').message
 )
-// if a non array item is passed to arr, throw an error
 test(
   'array: concat() - 2',
   (() => {
@@ -147,35 +143,64 @@ test(
   })(),
   new Error('Please pass in an array to concatenate items').message
 )
-// if no items are passed to rest, return the existing arr
 test(
   'array: concat() - 3',
   concat([1,2,3]),
   [1,2,3],
 )
-// if undefined, null, 0, false, '' is passed in, insert all items in arr
 test(
   'array: concat() - 4',
   concat([], undefined, null, 0, false, ''),
   [undefined, null, 0, false, ''],
 )
-// if an array of items is passed in, spread each item to the existing arr
 test(
   'array: concat() - 5',
   concat([1,2,3], [4,5,6]),
   [1,2,3,4,5,6],
 )
-// if multiple arrays are passed in, spread each arr item and add them all to arr
 test(
   'array: concat() - 6',
   concat([1,2,3], [4,5,6], [8,9], 'coffee', false, ['Mango']),
   [1,2,3,4,5,6,8,9, 'coffee', false, 'Mango'],
 )
-// if array of array comes in, do not spread nested arrays
 test(
   'array: concat() - 7',
   concat([1,2,3], [['do', 'not', 'spread']], [3,4,5]),
   [1,2,3, ['do', 'not', 'spread'], 3,4,5],
 )
 
-
+// ========== array: reverse() ==========
+test(
+  'array: reverse() - 1',
+  (() => {
+    try {
+      const value = reverse();
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in an array to reverse').message
+)
+test(
+  'array: reverse() - 2',
+  (() => {
+    try {
+      const value = reverse(null);
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in an array to reverse').message
+)
+test(
+  'array: reverse() - 3',
+  reverse([1,2,3]),
+  [3,2,1],
+)
+test(
+  'array: reverse() - 4',
+  reverse([]),
+  [],
+)
