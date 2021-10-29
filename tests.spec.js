@@ -1,5 +1,5 @@
 const test = require('./src/test/test');
-const { at, isWholeNumber, isDecimalNumber, concat, reverse, sort, join } = require('./index');
+const { at, isWholeNumber, isDecimalNumber, concat, reverse, sort, join, findIndex } = require('./index');
 
 // ========== array: at() ==========
 test(
@@ -389,4 +389,50 @@ test(
   'array: join() - 10',
   join([[1], [1,2], [1,2,4]], ''),
   '11,21,2,4'
+);
+
+// ========== array: findIndex() ==========
+test(
+  'array: findIndex() - 1',
+  (() => {
+    try {
+      const value = findIndex();
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in an array to find index').message
+);
+test(
+  'array: findIndex() - 2',
+  (() => {
+    try {
+      const value = findIndex([], false);
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in a callback to find index').message
+);
+test(
+  'array: findIndex() - 3',
+  findIndex([1,2,3], (elem) => elem === 2),
+  1
+);
+test(
+  'array: findIndex() - 4',
+  findIndex(['hello', 'world'], (elem) => elem === 'hello'),
+  0,
+);
+test(
+  'array: findIndex() - 5',
+  findIndex(['hello', 'world'], (elem) => elem === 'test'),
+  -1,
+);
+test(
+  'array: findIndex() - 6',
+  findIndex(['hello', 'world'], (elem, index) => index === 0),
+  0,
 );
