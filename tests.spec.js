@@ -1,5 +1,5 @@
 const test = require('./src/test/test');
-const { at, isWholeNumber, isDecimalNumber, concat, reverse, sort } = require('./index');
+const { at, isWholeNumber, isDecimalNumber, concat, reverse, sort, join } = require('./index');
 
 // ========== array: at() ==========
 test(
@@ -302,4 +302,91 @@ test(
   'array: sort() - 11',
   sort([[1], [1,2], [1,2,4]], (a, b) => b.length - a.length),
   [[1,2,4], [1,2], [1]],
+);
+
+// ========== array: join() ==========
+test(
+  'array: join() - 1',
+  (() => {
+    try {
+      const value = join();
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in an array to join separators').message
+);
+test(
+  'array: join() - 2',
+  (() => {
+    try {
+      const value = join([]);
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in a separator to join array with').message
+);
+test(
+  'array: join() - 2',
+  (() => {
+    try {
+      const value = join([], false);
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Separator must be of type string to join array').message
+);
+test(
+  'array: join() - 2',
+  (() => {
+    try {
+      const value = join([], false);
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Separator must be of type string to join array').message
+);
+test(
+  'array: join() - 11',
+  join(['hello', 'world'], ', '),
+  'hello, world'
+);
+test(
+  'array: join() - 11',
+  join([undefined, 'test'], ', '),
+  ', test'
+);
+test(
+  'array: join() - 11',
+  join([undefined, null], ', '),
+  ', '
+);
+test(
+  'array: join() - 11',
+  join([
+    function a() { return 'a'; }, 
+    function b() { return 'b'; },
+  ], '+'),
+  'function a() { return \'a\'; }+function b() { return \'b\'; }'
+);
+test(
+  'array: join() - 11',
+  join([
+    { name: 'Jack'}, 
+    {name: 'Kevin'},
+    'nice'
+  ], ',,'),
+  '[object Object],,[object Object],,nice'
+);
+test(
+  'array: join() - 11',
+  join([[1], [1,2], [1,2,4]], ''),
+  '11,21,2,4'
 );
