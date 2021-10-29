@@ -35,7 +35,7 @@ const join = (arr, separator) => {
     const lastIndex = arr.length - 1;
     const item = isObject(arr[i]) 
       ? `[object Object]` 
-      : `${arr[i]?.toString() || ''}`;
+      : `${arr[i] && arr[i].toString() || ''}`;
     if (i === lastIndex) {
       result = `${result}${item}`;
     } else {
