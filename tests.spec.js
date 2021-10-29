@@ -330,7 +330,7 @@ test(
   new Error('Please pass in a separator to join array with').message
 );
 test(
-  'array: join() - 2',
+  'array: join() - 3',
   (() => {
     try {
       const value = join([], false);
@@ -342,7 +342,7 @@ test(
   new Error('Separator must be of type string to join array').message
 );
 test(
-  'array: join() - 2',
+  'array: join() - 4',
   (() => {
     try {
       const value = join([], false);
@@ -354,22 +354,22 @@ test(
   new Error('Separator must be of type string to join array').message
 );
 test(
-  'array: join() - 11',
+  'array: join() - 5',
   join(['hello', 'world'], ', '),
   'hello, world'
 );
 test(
-  'array: join() - 11',
+  'array: join() - 6',
   join([undefined, 'test'], ', '),
   ', test'
 );
 test(
-  'array: join() - 11',
+  'array: join() - 7',
   join([undefined, null], ', '),
   ', '
 );
 test(
-  'array: join() - 11',
+  'array: join() - 8',
   join([
     function a() { return 'a'; }, 
     function b() { return 'b'; },
@@ -377,7 +377,7 @@ test(
   'function a() { return \'a\'; }+function b() { return \'b\'; }'
 );
 test(
-  'array: join() - 11',
+  'array: join() - 9',
   join([
     { name: 'Jack'}, 
     {name: 'Kevin'},
@@ -386,7 +386,7 @@ test(
   '[object Object],,[object Object],,nice'
 );
 test(
-  'array: join() - 11',
+  'array: join() - 10',
   join([[1], [1,2], [1,2,4]], ''),
   '11,21,2,4'
 );
