@@ -1,5 +1,6 @@
-const test = require('./src/test/test');
+const { test, isEqual } = require('./src/test/test');
 const { at, isWholeNumber, isDecimalNumber, concat, reverse, sort, join, findIndex } = require('./index');
+const shuffle = require('./src/array/shuffle');
 
 // ========== array: at() ==========
 test(
@@ -435,4 +436,54 @@ test(
   'array: findIndex() - 6',
   findIndex(['hello', 'world'], (elem, index) => index === 0),
   0,
+);
+
+// ========== array: shuffle() ==========
+test(
+  'array: shuffle() - 1',
+  (() => {
+    try {
+      const value = shuffle();
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in an array to shuffle items').message
+);
+test(
+  'array: shuffle() - 2',
+  (() => {
+    try {
+      const value = shuffle(false);
+      return value;
+    } catch (e) {
+      return e.message;
+    }
+  })(),
+  new Error('Please pass in an array to shuffle items').message
+);
+test(
+  'array: shuffle() - 3',
+  (() => {
+    return !isEqual(shuffle([1,2,3,4,5]), [1,2,3,4,5]);
+  })(),
+  true,
+);
+test(
+  'array: shuffle() - 4',
+  (() => {
+    return isEqual(shuffle([]), []);
+  })(),
+  true,
+);
+test(
+  'array: shuffle() - 5',
+  (() => {
+    return !isEqual(
+      shuffle([{ a: 1 }, 'coffee', false]), 
+      [{ a: 1 }, 'coffee', false]
+    );
+  })(),
+  true,
 );

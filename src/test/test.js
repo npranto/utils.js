@@ -47,4 +47,4 @@ const test = (id = '', expected, actual) => {
   }
 }
 
-module.exports = test;
+module.exports = { test, isEqual };
